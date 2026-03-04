@@ -1,0 +1,14 @@
+# Raspberry Pi (ARM64) build
+FROM python:3.11-slim-bookworm
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 8080
+
+# Single worker for Pi resource constraints
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "1", "--timeout", "120", "app.server:create_app()"]

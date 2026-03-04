@@ -1,0 +1,84 @@
+# Docker Compose for BlackRoad Pi Cluster
+# Deploy across: blackroad-pi, aria64, alice, lucidia-alt
+
+services:
+  # Gateway node — receives traffic via Cloudflare tunnel
+  stripe-gateway:
+    build:
+      context: ..
+      dockerfile: Dockerfile.pi
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_NAME=blackroad-pi
+      - NODE_IP=192.168.4.64
+      - FLASK_PORT=8080
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_PUBLISHABLE_KEY=${STRIPE_PUBLISHABLE_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+      - UPSTREAM_URL=https://edge.blackroad.io
+    restart: unless-stopped
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == blackroad-pi
+
+  # Worker node — aria64 (high capacity)
+  stripe-worker-aria:
+    build:
+      context: ..
+      dockerfile: Dockerfile.pi
+    ports:
+      - "8081:8080"
+    environment:
+      - NODE_NAME=aria64
+      - NODE_IP=192.168.4.38
+      - FLASK_PORT=8080
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_PUBLISHABLE_KEY=${STRIPE_PUBLISHABLE_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+    restart: unless-stopped
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == aria64
+
+  # Worker node — alice
+  stripe-worker-alice:
+    build:
+      context: ..
+      dockerfile: Dockerfile.pi
+    ports:
+      - "8082:8080"
+    environment:
+      - NODE_NAME=alice
+      - NODE_IP=192.168.4.49
+      - FLASK_PORT=8080
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_PUBLISHABLE_KEY=${STRIPE_PUBLISHABLE_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+    restart: unless-stopped
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == alice
+
+  # Worker node — lucidia-alt
+  stripe-worker-lucidia:
+    build:
+      context: ..
+      dockerfile: Dockerfile.pi
+    ports:
+      - "8083:8080"
+    environment:
+      - NODE_NAME=lucidia-alt
+      - NODE_IP=192.168.4.99
+      - FLASK_PORT=8080
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_PUBLISHABLE_KEY=${STRIPE_PUBLISHABLE_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+    restart: unless-stopped
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == lucidia-alt

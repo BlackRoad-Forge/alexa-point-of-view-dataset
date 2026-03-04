@@ -1,3 +1,26 @@
 # DS_Store
-
 *.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+venv/
+.venv/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+
+# Coverage
+htmlcov/
+.coverage
+coverage.xml
