@@ -1,3 +1,19 @@
-# DS_Store
-
 *.DS_Store
+_site/
+__pycache__/
+*.pyc
+*.pyo
+.env
+.env.*
+*.log
+node_modules/
+.wrangler/
+dist/
+.vercel/
+.railway/
+*.tmp
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
