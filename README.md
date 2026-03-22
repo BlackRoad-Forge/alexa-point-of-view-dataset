@@ -1,3 +1,13 @@
+# Lucidia POV Dataset — Message perspective transformation data for Lucidia AI.
+
+> Part of the [BlackRoad OS](https://blackroad.io) sovereign technology ecosystem.
+> Licensed under [BlackRoad OS, Inc. Proprietary License](./LICENSE).
+
+[![BlackRoad](https://img.shields.io/badge/BlackRoad-OS-black?style=flat-square)](https://blackroad.io)
+[![License](https://img.shields.io/badge/License-Proprietary-black?style=flat-square)](./LICENSE)
+
+---
+
 # Point of View (POV) of Message Conversion Dataset
 Virtual assistants (VAs) tend to be literal in their delivery of messages. Most likely, if you ask them to deliver a message, the VAs either send a recorded message or a literal transcription to the receiver. To make incremental improvement towards a virtual assistant that you may speak to conversationally and naturally, we have provided the data necessary to build AI systems that can convert the point of view of messages spoken to virtual assistants.
 
